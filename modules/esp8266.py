@@ -1,15 +1,18 @@
-from consts import NetworkConsts, ESP8266Consts
+from consts import ESP8266Consts
 import uart_utils
 import time
 from machine import UART, Pin
 
 
 class ESP8266:
-    def __init__(self):
+    def __init__(self, wifi_ssid, wifi_password):
         self.state_pin = Pin(ESP8266Consts.STATE_PIN_ID, Pin.OUT)
         self.reset_pin = Pin(ESP8266Consts.RESET_PIN_ID, Pin.OUT)
 
         self.uart = UART(ESP8266Consts.UART_ID, ESP8266Consts.UART_BAUDRATE)
+
+        self.wifi_ssid = wifi_ssid
+        self.wifi_password = wifi_password
 
     def startup(self):
         self.state_pin.on()
@@ -24,12 +27,15 @@ class ESP8266:
 
     def connect_to_network(self):
         uart_utils.send_cmd(self.uart, "AT+CWQAP", "OK")
-        uart_utils.send_cmd(self.uart, f'AT+CWJAP="{NetworkConsts.WIFI_SSID}","{NetworkConsts.WIFI_PASSWORD}"', "OK")
+        uart_utils.send_cmd(self.uart, f'AT+CWJAP="{self.wifi_ssid}","{self.wifi_password}"', "OK")
         uart_utils.send_cmd(self.uart, "AT+CWMODE=1", "OK")
         uart_utils.send_cmd(self.uart, "AT+CIPMODE=0", "OK")
 
     def check_connection(self):
-        return uart_utils.send_cmd(self.uart, f'AT+PING="{NetworkConsts.API_IP}"', "OK")
+        return uart_utils.send_cmd(self.uart, "AT+CIFSR", "OK")
+
+    def check_connection_with_host(self, host_ip):
+        return uart_utils.send_cmd(self.uart, f'AT+PING="{host_ip}"', "OK")
 
     def send_post(self):
         pass

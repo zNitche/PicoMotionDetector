@@ -1,8 +1,9 @@
 from modules.esp8266 import ESP8266
+from consts import NetworkConsts
 
 
 def main():
-    esp8266 = ESP8266()
+    esp8266 = ESP8266(NetworkConsts.WIFI_SSID, NetworkConsts.WIFI_PASSWORD)
 
     esp8266.startup()
 
@@ -12,7 +13,9 @@ def main():
         esp8266.connect_to_network()
 
         if esp8266.check_connection():
-            print("Connected")
+            print("Connected To WiFi Network")
+
+            print(esp8266.check_connection_with_host(NetworkConsts.API_IP))
 
         else:
             print("Failed to connect")
