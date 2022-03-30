@@ -15,13 +15,11 @@ def main():
         if esp8266.check_connection():
             print("Connected To WiFi Network")
 
-            print(esp8266.check_connection_with_host(NetworkConsts.API_IP))
+            if esp8266.check_connection_with_host(NetworkConsts.API_IP):
+                print("Sending detection data")
 
-        else:
-            print("Failed to connect")
-
-    else:
-        print("Module Failed")
+                esp8266.send_post('{"auth_token": "test_auth_token", "sensor": "test sensor"}',
+                                  NetworkConsts.API_IP, NetworkConsts.API_PORT)
 
 
 if __name__ == '__main__':

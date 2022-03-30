@@ -3,6 +3,7 @@ class NetworkConsts:
     WIFI_SSID = ""
 
     API_IP = ""
+    API_PORT = ""
 
 
 class ESP8266Consts:
