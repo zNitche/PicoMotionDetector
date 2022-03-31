@@ -7,6 +7,7 @@ import time
 class MotionDetector:
     def __init__(self):
         self.onboard_pin = Pin(25, Pin.OUT)
+        self.motion_sensor = Pin(DetectorConsts.SENSOR_PIN_ID, Pin.IN, Pin.PULL_UP)
 
         self.esp8266 = ESP8266()
 
@@ -27,11 +28,12 @@ class MotionDetector:
 
     def mainloop(self):
         while True:
-            if self.esp8266.check_connection():
-                self.esp8266.send_post('{"auth_token": "' + DetectorConsts.API_AUTH_TOKEN + '", "sensor": "' + DetectorConsts.DETECTOR_NAME + '"}',
-                                      NetworkConsts.API_IP, NetworkConsts.API_PORT)
+            if self.motion_sensor.value():
+                if self.esp8266.check_connection():
+                    self.esp8266.send_post('{"auth_token": "' + DetectorConsts.API_AUTH_TOKEN + '", "sensor": "' + DetectorConsts.DETECTOR_NAME + '"}',
+                                          NetworkConsts.API_IP, NetworkConsts.API_PORT)
 
-            else:
-                self.init_wifi_connection()
+                else:
+                    self.init_wifi_connection()
 
             time.sleep(DetectorConsts.UPDATE_RATE)
