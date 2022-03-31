@@ -13,12 +13,14 @@ class MotionDetector:
         self.onboard_pin.on()
 
     def init_wifi_connection(self):
-        self.esp8266.startup()
-
         if self.esp8266.check_module():
             self.esp8266.connect_to_network(NetworkConsts.WIFI_SSID, NetworkConsts.WIFI_PASSWORD)
 
+        else:
+            self.esp8266.startup()
+
     def start_detector(self):
+        self.esp8266.startup()
         self.init_wifi_connection()
 
         self.mainloop()
@@ -26,7 +28,10 @@ class MotionDetector:
     def mainloop(self):
         while True:
             if self.esp8266.check_connection():
-                self.esp8266.send_post('{"auth_token": "test_auth_token", "sensor": "test sensor"}',
+                self.esp8266.send_post('{"auth_token": "' + DetectorConsts.API_AUTH_TOKEN + '", "sensor": "' + DetectorConsts.DETECTOR_NAME + '"}',
                                       NetworkConsts.API_IP, NetworkConsts.API_PORT)
+
+            else:
+                self.init_wifi_connection()
 
             time.sleep(DetectorConsts.UPDATE_RATE)

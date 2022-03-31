@@ -15,4 +15,7 @@ class ESP8266Consts:
 
 
 class DetectorConsts:
+    DETECTOR_NAME = "Main Room Detector"
+    API_AUTH_TOKEN = "test_auth_token"
+
     UPDATE_RATE = 2

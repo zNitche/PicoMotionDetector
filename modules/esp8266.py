@@ -42,3 +42,5 @@ class ESP8266:
 
             uart_utils.send_cmd(self.uart, f"AT+CIPSEND={str(len(post_data))}", ">")
             uart_utils.send_cmd(self.uart, post_data, "OK")
+
+            uart_utils.send_cmd(self.uart, "AT+CIPCLOSE", "OK")
