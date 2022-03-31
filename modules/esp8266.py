@@ -5,14 +5,11 @@ from machine import UART, Pin
 
 
 class ESP8266:
-    def __init__(self, wifi_ssid, wifi_password):
+    def __init__(self):
         self.state_pin = Pin(ESP8266Consts.STATE_PIN_ID, Pin.OUT)
         self.reset_pin = Pin(ESP8266Consts.RESET_PIN_ID, Pin.OUT)
 
         self.uart = UART(ESP8266Consts.UART_ID, ESP8266Consts.UART_BAUDRATE)
-
-        self.wifi_ssid = wifi_ssid
-        self.wifi_password = wifi_password
 
     def startup(self):
         self.state_pin.on()
@@ -25,9 +22,9 @@ class ESP8266:
     def check_module(self):
         return uart_utils.send_cmd(self.uart, "AT", "ready")
 
-    def connect_to_network(self):
+    def connect_to_network(self, ssid, password):
         uart_utils.send_cmd(self.uart, "AT+CWQAP", "OK")
-        uart_utils.send_cmd(self.uart, f'AT+CWJAP="{self.wifi_ssid}","{self.wifi_password}"', "OK")
+        uart_utils.send_cmd(self.uart, f'AT+CWJAP="{ssid}","{password}"', "OK")
         uart_utils.send_cmd(self.uart, "AT+CWMODE=1", "OK")
         uart_utils.send_cmd(self.uart, "AT+CIPMODE=0", "OK")
 
