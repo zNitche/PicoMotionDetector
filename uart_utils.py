@@ -1,7 +1,7 @@
 import utime
 
 
-def send_cmd(uart, cmd, ack, timeout=3000):
+def send_cmd(uart, cmd, ack, timeout=5000):
     status = False
     current_time = utime.ticks_ms()
 
