@@ -6,12 +6,12 @@ import time
 
 class MotionDetector:
     def __init__(self):
-        self.onboard_pin = Pin(25, Pin.OUT)
+        self.onboard_led = Pin(25, Pin.OUT)
         self.motion_sensor = Pin(DetectorConsts.SENSOR_PIN_ID, Pin.IN, Pin.PULL_DOWN)
 
         self.esp8266 = ESP8266()
 
-        self.onboard_pin.on()
+        self.onboard_led.on()
 
     def init_wifi_connection(self):
         if self.esp8266.check_module():
