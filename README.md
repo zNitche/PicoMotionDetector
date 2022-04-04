@@ -15,6 +15,10 @@ Raspberry Pi Pico powered motion detector integrated with [MotionDetectionAPI](h
 - Some gold pin connectors
 - Some connecting wires
 
+##### For better detection results (less false positives) 
+Use 100 uF capacitor connected in parallel between VCC and GND of PIR sensor.
+Additionally if input voltage is below 7V (L78 voltage dropout is 2V), power circuit using 5V power supply not using voltage stabilizer.
+
 #### Setup
 1. Set WiFi network and [MotionDetectionAPI](https://github.com/TheZodiaCC/MotionDetectionAPI) details in `consts.py`/`NetworkConsts`
 2. If needed tweak `ESP8266Consts` and / or `DetectorConsts` for PIN ids.
