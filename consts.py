@@ -18,6 +18,8 @@ class DetectorConsts:
     SENSOR_PIN_ID = 21
 
     DETECTOR_NAME = ""
+
+    API_ENDPOINT_PATH = "/api/notify"
     API_AUTH_TOKEN = ""
 
     UPDATE_RATE = 0.5

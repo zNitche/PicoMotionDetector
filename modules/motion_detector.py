@@ -31,8 +31,9 @@ class MotionDetector:
             if self.motion_sensor.value():
                 if self.esp8266.check_connection():
                     if self.esp8266.check_connection_with_host(NetworkConsts.API_IP):
-                        self.esp8266.send_post('{"auth_token": "' + DetectorConsts.API_AUTH_TOKEN + '", "sensor": "' + DetectorConsts.DETECTOR_NAME + '"}',
-                                              NetworkConsts.API_IP, NetworkConsts.API_PORT)
+                        self.esp8266.send_post(
+                            '{"auth_token": "' + DetectorConsts.API_AUTH_TOKEN + '", "sensor": "' + DetectorConsts.DETECTOR_NAME + '"}',
+                            NetworkConsts.API_IP, DetectorConsts.API_ENDPOINT_PATH, NetworkConsts.API_PORT)
 
                 else:
                     self.init_wifi_connection()
