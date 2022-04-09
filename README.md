@@ -22,3 +22,6 @@ Additionally if input voltage is below 7V (L78 voltage dropout is 2V), power cir
 #### Setup
 1. Set WiFi network and [MotionDetectionAPI](https://github.com/TheZodiaCC/MotionDetectionAPI) details in `consts.py`/`NetworkConsts` and `consts.py`/`DetectorConsts`
 2. If needed tweak `ESP8266Consts` and / or `DetectorConsts` for PIN ids.
+
+#### Media
+
