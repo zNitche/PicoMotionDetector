@@ -24,4 +24,6 @@ Additionally if input voltage is below 7V (L78 voltage dropout is 2V), power cir
 2. If needed tweak `ESP8266Consts` and / or `DetectorConsts` for PIN ids.
 
 #### Media
-
+![picomotiondetector_1](https://github.com/TheZodiaCC/PicoMotionDetector/blob/main/media/picomotiondetector_1.jpg)
+![picomotiondetector_2](https://github.com/TheZodiaCC/PicoMotionDetector/blob/main/media/picomotiondetector_2.jpg)
+![picomotiondetector_3](https://github.com/TheZodiaCC/PicoMotionDetector/blob/main/media/picomotiondetector_3.jpg)
