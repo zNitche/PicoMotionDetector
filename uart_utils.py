@@ -11,6 +11,8 @@ def send_cmd(uart, cmd, ack, timeout=5000):
         uart_data = uart.read()
 
         if uart_data is not None:
+            # print(uart_data)
+
             try:
                 if ack in uart_data.decode():
                     status = True
